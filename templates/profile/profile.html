@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="custom-container mt-5">
+    <div class="custom-row justify-content-center">
+        <div class="custom-col-12">
+            <h2 class="custom-text-center custom-mb-4">Update Your Profile</h2>
+            <div class="custom-profile-form-container">
+                {% if messages %}
+                    <div class="alert alert-success custom-alert" role="alert">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form class="custom-profile-form" method="POST" action="{% url 'profile-update' %}">
+                    {% csrf_token %}
+                    <div class="custom-form-row">
+                        <div class="custom-form-group custom-col-6">
+                            <label for="firstname">Firstname <span class="custom-text-danger">*</span></label>
+                            <input type="text" class="custom-form-control" id="firstname" placeholder="Enter Firstname" name="firstname" value="{{ user.first_name }}">
+                        </div>
+                        <div class="custom-form-group custom-col-6">
+                            <label for="lastname">Lastname <span class="custom-text-danger">*</span></label>
+                            <input type="text" class="custom-form-control" id="lastname" placeholder="Enter Lastname" name="lastname" value="{{ user.last_name }}">
+                        </div>
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="username">Username <span class="custom-text-danger">*</span></label>
+                        <input type="text" class="custom-form-control" id="username" value="{{ user.username }}" readonly name="username">
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="email">Email Address <span class="custom-text-danger">*</span></label>
+                        <input type="email" class="custom-form-control" id="email" value="{{ user.email }}" readonly name="email">
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="password">Password <span class="custom-text-danger">*</span></label>
+                        <input type="password" class="custom-form-control" id="password" placeholder="Fill Only If You Want To Change Password" name="password">
+                    </div>
+                    <div class="custom-form-group custom-text-center">
+                        <button type="submit" class="custom-btn custom-btn-warning">Update Profile</button>
+                        <a href="{% url 'logout' %}" class="custom-btn custom-btn-danger">Logout</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
