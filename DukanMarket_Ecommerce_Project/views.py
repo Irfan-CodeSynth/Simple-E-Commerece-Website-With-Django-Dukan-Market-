@@ -13,6 +13,12 @@ from django.db.models import Max, Min , Sum
 from cart.cart import Cart
 import random
 
+import stripe
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+
+
 
 
 def BASE(request):
@@ -400,5 +406,13 @@ def apply_coupon(request):
 
     # Redirect back to the cart page or handle it via AJAX
     return redirect('cart')
+
+
+
+
+
+
+
+
 
 
